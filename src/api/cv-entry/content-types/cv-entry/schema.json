@@ -1,0 +1,48 @@
+{
+    "kind": "collectionType",
+    "collectionName": "cv_entries",
+    "info": {
+        "singularName": "cv-entry",
+        "pluralName": "cv-entries",
+        "displayName": "CV Entry",
+        "description": "CV entries for education and experience"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "category": {
+            "type": "enumeration",
+            "enum": [
+                "education",
+                "experience"
+            ],
+            "required": true
+        },
+        "timeFrom": {
+            "type": "string",
+            "required": true
+        },
+        "timeTo": {
+            "type": "string",
+            "required": true
+        },
+        "description": {
+            "type": "richtext",
+            "required": true
+        },
+        "link": {
+            "type": "string"
+        },
+        "order": {
+            "type": "integer",
+            "default": 0,
+            "required": true
+        }
+    }
+}

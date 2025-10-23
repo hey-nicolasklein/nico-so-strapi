@@ -1,0 +1,37 @@
+{
+    "kind": "collectionType",
+    "collectionName": "sections",
+    "info": {
+        "singularName": "section",
+        "pluralName": "sections",
+        "displayName": "Section",
+        "description": "Website sections configuration"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "identifier": {
+            "type": "uid",
+            "required": true
+        },
+        "heading": {
+            "type": "string",
+            "required": true
+        },
+        "description": {
+            "type": "text"
+        },
+        "visible": {
+            "type": "boolean",
+            "default": true,
+            "required": true
+        },
+        "order": {
+            "type": "integer",
+            "default": 0,
+            "required": true
+        }
+    }
+}

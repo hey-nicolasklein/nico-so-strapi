@@ -1,0 +1,86 @@
+{
+    "kind": "singleType",
+    "collectionName": "page_contents",
+    "info": {
+        "singularName": "page-content",
+        "pluralName": "page-contents",
+        "displayName": "Page Content",
+        "description": "Main page content and settings"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "siteName": {
+            "type": "string",
+            "default": "Nicolas",
+            "required": true
+        },
+        "siteTitle": {
+            "type": "string",
+            "required": true
+        },
+        "taglineDesktop": {
+            "type": "string",
+            "required": true
+        },
+        "taglineMobile": {
+            "type": "string",
+            "required": true
+        },
+        "metaDescription": {
+            "type": "text",
+            "required": true
+        },
+        "heroGreeting": {
+            "type": "string",
+            "default": "Hey I'm",
+            "required": true
+        },
+        "aboutHeading": {
+            "type": "string",
+            "default": "About me",
+            "required": true
+        },
+        "aboutText": {
+            "type": "richtext",
+            "required": true
+        },
+        "aboutInterests": {
+            "type": "text"
+        },
+        "cabinetDescription": {
+            "type": "text"
+        },
+        "email": {
+            "type": "email",
+            "required": true
+        },
+        "birthday": {
+            "type": "date",
+            "required": true
+        },
+        "profileImage": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "memojiLight": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "memojiDark": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images"
+            ]
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "kind": "singleType",
+    "collectionName": "site_settings",
+  "info": {
+    "singularName": "site-setting",
+    "pluralName": "site-settings",
+    "displayName": "Site Settings",
+    "description": "Global site settings and configuration"
+  },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "footerText": {
+            "type": "string",
+            "default": "created with",
+            "required": true
+        },
+        "footerCopyright": {
+            "type": "string",
+            "default": "© {year} Nicolas Klein",
+            "required": true
+        },
+        "contactHeading": {
+            "type": "string",
+            "default": "Say hello 👋🏼",
+            "required": true
+        },
+        "contactCta": {
+            "type": "string",
+            "default": "Let's change the world together.",
+            "required": true
+        },
+        "emailSubject": {
+            "type": "string",
+            "default": "Hey"
+        },
+        "emailBody": {
+            "type": "text",
+            "default": "Let us talk :)"
+        }
+    }
+}
