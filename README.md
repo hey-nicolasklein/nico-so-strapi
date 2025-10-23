@@ -1,61 +1,90 @@
-# 🚀 Getting started with Strapi
+# 🚀 Strapi Backend (nico-so-strapi)
+Deploy to Strapi Cloud
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+Strapi v5 backend powering the nico-so portfolio. It exposes content APIs for bio, gallery-item, portfolio-item, and story.
 
-### `develop`
+## Repository links
+- Frontend (Next.js 15): nicolasklein/nico-so
+- Backend (this repo): nicolasklein/nico-so-strapi
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+## Prerequisites
+- Node.js 20 or 22
+- pnpm (recommended): `npm i -g pnpm`
+
+## Quick start (local)
+
+### Start Strapi
+```bash
+pnpm install
+pnpm develop
+```
+Then open http://localhost:1337/admin to create the initial admin user.
+
+### Configure access for the frontend
+1. Create an API Token: Settings → API Tokens → New Token. Copy the value.
+2. Public role: Settings → Roles → Public → enable "find" and "findOne" on bio, gallery-item, portfolio-item, story.
+
+### Start the frontend
+Follow the frontend quick start and set `.env.local` (values shown below). See: nico-so README
 
 ```
-npm run develop
-# or
-yarn develop
+NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+STRAPI_API_TOKEN=your_strapi_api_token
 ```
 
-### `start`
+## Content types (alignment with frontend)
+- **bio** (single type): tags (string), title (string), description (text), profileImage (media)
+- **gallery-item** (collection): tag (string), image (media, multiple)
+- **portfolio-item** (collection): Title (string), Description (string), FullImage (media)
+- **story** (collection): title (string), description (text), images (media, multiple)
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+## API endpoints
+Base URL: http://localhost:1337
 
-```
-npm run start
-# or
-yarn start
-```
+- `GET /api/bio?populate=*` — fetch single bio
+- `GET /api/gallery-items?populate=*` — list gallery items
+- `GET /api/portfolio-items?populate=*` — list portfolio items
+- `GET /api/stories?populate=*` — list stories (use sort=createdAt:desc if needed)
 
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
-yarn build
-```
-
-## ⚙️ Deployment
-
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
-
-```
-yarn strapi deploy
+### Examples:
+```bash
+curl "http://localhost:1337/api/bio?populate=*" -H "Authorization: Bearer $STRAPI_API_TOKEN"
+curl "http://localhost:1337/api/gallery-items?populate=*&pagination[pageSize]=100" -H "Authorization: Bearer $STRAPI_API_TOKEN"
 ```
 
-## 📚 Learn more
+## Seed data (optional)
+An example seed script is provided. It uses the default SQLite database and loads assets from data/uploads.
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+```bash
+pnpm run seed:example
+```
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+## CORS
+Default middleware includes strapi::cors. If the frontend runs on a different origin (e.g., http://localhost:3000 or a Vercel domain), ensure that origin is allowed.
 
-## ✨ Community
+## Scripts
+- `pnpm develop`   # Start Strapi with autoReload
+- `pnpm build`     # Build the admin panel
+- `pnpm start`     # Start in production
+- `pnpm deploy`    # Deploy (when configured)
+- `pnpm seed:example`
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+## Deployment
+Deploy to Strapi Cloud or any Node host. Configure the database and uploads (local/S3). Provide a production API Token for the frontend and set CORS to allow the frontend origin.
 
----
+### Deploy to Strapi Cloud
+1. Sign up or log in: [Strapi Cloud](https://cloud.strapi.io)
+2. Connect GitHub and select this repository.
+3. Choose plan, branch, and configure any environment variables.
+4. Deploy the project.
+5. After deploy: open the admin, create an API Token, configure Public role permissions, and note your cloud URL.
+6. In the frontend, set:
+   ```
+   NEXT_PUBLIC_STRAPI_URL=https://YOUR-STRAPI-CLOUD-URL
+   STRAPI_API_TOKEN=your_production_token
+   ```
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+Docs: [Strapi Cloud Deployment Guide](https://docs.strapi.io/dev-docs/deployment/cloud)
+
+## Learn more
+- Strapi docs: https://docs.strapi.io
